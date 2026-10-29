@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KlimaShift: A Thinking Assignment</title>
+<style>
+  :root{
+    --ink:#333333; --muted:#6b6880; --line:#e4e1ef; --bg:#f5f3fc; --card:#ffffff;
+    --green:#8271cd; --green-d:#35295f; --green-l:#ece8f8;
+    --amber:#9d89da; --amber-l:#f2effb;
+    --blue:#6c5ab1; --blue-l:#e6e1f8;
+    --ok:#59b890;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;font-size:16px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  header.hero{background:linear-gradient(135deg,#35295f,#8271cd);color:#fff;padding:56px 0 48px}
+  .logo{height:34px;display:block;margin-bottom:22px;background:#fff;padding:7px 12px;border-radius:8px}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:99px;margin-bottom:16px}
+  h1{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:40px;line-height:1.15;margin:0 0 12px}
+  .hero p{font-size:19px;max-width:640px;margin:0;opacity:.95}
+  section{padding:44px 0 8px}
+  h2{font-size:26px;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 24px}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-size:15px;font-weight:700;margin-right:10px;vertical-align:middle}
+
+  /* what we do */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .box .ic{font-size:28px}
+  .box h3{margin:8px 0 4px;font-size:17px}
+  .box p{margin:0;color:var(--muted);font-size:15px}
+  .promise{margin-top:16px;background:var(--green-l);border-left:5px solid var(--green);padding:16px 20px;border-radius:10px;font-size:16px}
+
+  /* flow */
+  .flow{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:8px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 10px;text-align:center;position:relative}
+  .step b{display:block;font-size:12px;color:var(--green-d);letter-spacing:.05em;margin-bottom:4px}
+  .step span{font-size:14px;font-weight:600;display:block}
+  .step small{display:block;color:var(--muted);font-size:12px;margin-top:6px;line-height:1.35}
+  .step:not(:last-child)::after{content:"›";position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--green);font-size:22px;font-weight:700;z-index:2}
+  .note{margin-top:14px;background:var(--amber-l);border-radius:10px;padding:12px 16px;font-size:15px}
+
+  /* questions */
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px}
+  .q h3{margin:0 0 4px;font-size:20px}
+  .q .ask{color:var(--muted);margin:0 0 14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .chips li{background:var(--green-l);color:var(--green-d);padding:7px 12px;border-radius:99px;font-size:14px}
+  .chips.b li{background:var(--blue-l);color:var(--blue)}
+  .chips.a li{background:var(--amber-l);color:#35295f}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mini{border:1px dashed var(--line);border-radius:12px;padding:14px}
+  .mini h4{margin:0 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .mini ul{margin:0;padding-left:18px}
+  .mini li{margin:3px 0;font-size:15px}
+  .tablelike{width:100%;border-collapse:collapse;font-size:15px}
+  .tablelike th,.tablelike td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+  .tablelike th{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+  .tick{color:var(--green);font-weight:700}
+  .cross{color:#c0392b;font-weight:700}
+
+  /* timeline */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .tl div{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--green);border-radius:12px;padding:14px}
+  .tl div:nth-child(2){border-top-color:#9d89da}
+  .tl div:nth-child(3){border-top-color:var(--blue)}
+  .tl div:nth-child(4){border-top-color:var(--amber)}
+  .tl b{display:block;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .tl span{font-size:15px}
+
+  .look{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .look .box{text-align:center}
+  .final{margin:40px 0 56px;background:var(--green-d);color:#fff;border-radius:16px;padding:28px}
+  .final h2{color:#fff}
+  .final p{margin:6px 0 0;opacity:.9}
+  footer{padding:0 0 40px;color:var(--muted);font-size:13px;text-align:center}
+
+  @media(max-width:820px){
+    .three,.grid2,.look,.tl{grid-template-columns:1fr}
+    .flow{grid-template-columns:1fr 1fr}
+    .step:not(:last-child)::after{display:none}
+    h1{font-size:30px}
+  }
+  @media print{ body{background:#fff} .q,.box,.step{break-inside:avoid} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="logo" alt="KlimaShift" src="data:image/png;base64,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">
+    <span class="tag">Thinking assignment</span>
+    <h1>Show us how you would run KlimaShift smarter</h1>
+    <p>We cut energy waste in commercial buildings. Read how we work, then tell us what to automate, how we would know it works, and what to do first.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- WHAT WE DO -->
+  <section>
+    <h2>What we do</h2>
+    <p class="sub">KlimaShift helps restaurant, café and retail chains stop wasting electricity.</p>
+    <div class="three">
+      <div class="box"><div class="ic">🔌</div><h3>Fit a small kit</h3><p>A meter with current clamps on the electrical panel, plus temperature sensors and controls on key equipment.</p></div>
+      <div class="box"><div class="ic">📊</div><h3>Stream the data</h3><p>Our platform shows waste: equipment running overnight, freezers short-cycling, poor power factor. It also flags equipment likely to fail.</p></div>
+      <div class="box"><div class="ic">💰</div><h3>Charge for results</h3><p>Customers pay for the hardware and a monthly subscription, and expect a lower bill.</p></div>
+    </div>
+    <div class="promise"><b>The catch:</b> we win or lose on whether our savings claims and alerts are <b>correct</b>. That is why "how do we know it works?" matters as much as "what can we automate?"</div>
+  </section>
+
+  <!-- FLOW -->
+  <section>
+    <h2>How the work runs, end to end</h2>
+    <p class="sub">Seven steps from first conversation to renewal.</p>
+    <div class="flow">
+      <div class="step"><b>1</b><span>Win</span><small>Research chains, audits, pilots, proposals</small></div>
+      <div class="step"><b>2</b><span>Build</span><small>Assemble kits, ship to cities</small></div>
+      <div class="step"><b>3</b><span>Install</span><small>Field electricians, often at night</small></div>
+      <div class="step"><b>4</b><span>Connect</span><small>Each meter mapped to the right equipment</small></div>
+      <div class="step"><b>5</b><span>Analyse</span><small>Detect waste, estimate savings, predict failures</small></div>
+      <div class="step"><b>6</b><span>Act</span><small>Schedules, controls, maintenance</small></div>
+      <div class="step"><b>7</b><span>Prove</span><small>Savings reports and renewal</small></div>
+    </div>
+    <div class="note"><b>Today:</b> a small team runs most of this with spreadsheets, chat messages and manual judgment.</div>
+  </section>
+
+  <!-- ASSIGNMENT -->
+  <section>
+    <h2>Your assignment</h2>
+    <p class="sub">One document, up to 8 pages, answering five questions. Diagrams welcome.</p>
+
+    <div class="q">
+      <h3><span class="num">1</span>Map it</h3>
+      <p class="ask">Where does work get stuck, get repeated, or depend on one person?</p>
+      <ul class="chips">
+        <li>A diagram</li><li>A ranked list</li><li>How you decided the ranking</li>
+      </ul>
+    </div>
+
+    <div class="q">
+      <h3><span class="num">2</span>Decide what to automate</h3>
+      <p class="ask">Pick the 5 things most worth automating or handing to AI.</p>
+      <div class="grid2">
+        <div class="mini"><h4>For each of the 5</h4>
+          <ul><li>What it does</li><li>Which data it needs</li><li>What stays human</li><li>What happens if it is wrong</li></ul>
+        </div>
+        <div class="mini"><h4>Also name 2 you would NOT automate yet</h4>
+          <ul><li>And explain why not</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="q">
+      <h3><span class="num">3</span>Design the evals</h3>
+      <p class="ask">For each of your 5, how will we know it works?</p>
+      <ul class="chips b">
+        <li>What "correct" means</li><li>Where ground truth comes from</li><li>Metrics and thresholds</li><li>How failures are caught after launch</li><li>Who reviews edge cases</li>
+      </ul>
+      <p class="ask" style="margin:14px 0 0"><b>Then go deeper on one:</b> sketch its eval in enough detail that someone could build it.</p>
+    </div>
+
+    <div class="q">
+      <h3><span class="num">4</span>Prioritise</h3>
+      <p class="ask">You have 3 people and 90 days, and everything looks important. How do you choose what comes first, what waits and what gets dropped?</p>
+      <table class="tablelike">
+        <tr><th>Cover</th><th>What we want to see</th></tr>
+        <tr><td>Your criteria</td><td>For example customer impact, risk, effort, data readiness, learning value, and how you weigh them</td></tr>
+        <tr><td>One real trade-off</td><td>What you would choose, and who it would disappoint</td></tr>
+        <tr><td>What would change your mind</td><td>New information that would reorder the list</td></tr>
+        <tr><td>An urgent interruption</td><td>A customer or founder asks for something that breaks the plan. What do you do?</td></tr>
+      </table>
+    </div>
+
+    <div class="q">
+      <h3><span class="num">5</span>Sequence it</h3>
+      <p class="ask">Turn your priorities into a 90-day plan.</p>
+      <div class="tl">
+        <div><b>Day 14</b><span>A first visible win</span></div>
+        <div><b>Day 30</b><span>Early results and the first lessons</span></div>
+        <div><b>Day 60</b><span>Scale what worked, cut what did not</span></div>
+        <div><b>Day 90</b><span>Proof, using measures you named upfront</span></div>
+      </div>
+      <p class="ask" style="margin:14px 0 0">Also say what you would need from us, and which assumptions you are least sure of.</p>
+    </div>
+  </section>
+
+  <!-- LOOKING FOR -->
+  <section>
+    <h2>What we are looking for</h2>
+    <p class="sub">We care more about how you think than how polished it looks.</p>
+    <div class="look">
+      <div class="box"><div class="ic">⚖️</div><h3>Trade-offs</h3><p>Clear choices, not a list of tools.</p></div>
+      <div class="box"><div class="ic">❓</div><h3>Questions</h3><p>List the ones you would ask us. The best ones get answered.</p></div>
+      <div class="box"><div class="ic">🧭</div><h3>Honesty</h3><p>Say what you do not know.</p></div>
+      <div class="box"><div class="ic">🤖</div><h3>Tools</h3><p>Use any, AI included. Tell us where you did.</p></div>
+    </div>
+  </section>
+
+  <div class="final">
+    <h2>What happens next</h2>
+    <p>If your document is strong, we will talk it through together. The best plan may become your first project.</p>
+  </div>
+
+</main>
+
+<footer>KlimaShift · Intelligent Energy. Lesser Bills.</footer>
+</body>
+</html>

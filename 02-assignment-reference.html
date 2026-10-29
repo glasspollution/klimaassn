@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running KlimaShift Smarter</title>
+<style>
+  :root{
+    --ink:#24212f; --muted:#6b6880; --line:#e2dfec; --bg:#ffffff; --soft:#f6f4fc;
+    --accent:#6c5ab1; --accent-d:#35295f; --hot:#c8553d; --warm:#d99a2b; --ok:#3f9a74;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,sans-serif;font-size:13.5px;line-height:1.5}
+  .page{max-width:860px;margin:0 auto;padding:28px 16px 48px}
+  h1{font-size:25px;margin:0 0 4px;color:var(--accent-d)}
+  h2{font-size:18px;margin:26px 0 6px;color:var(--accent-d);border-bottom:2px solid var(--line);padding-bottom:4px}
+  h3{font-size:14.5px;margin:16px 0 4px}
+  p{margin:6px 0}
+  ul,ol{margin:4px 0 6px;padding-left:20px}
+  li{margin:2px 0}
+  .meta{color:var(--muted);font-size:12.5px;margin-bottom:10px}
+  .thesis{background:var(--soft);border-left:4px solid var(--accent);padding:10px 14px;border-radius:6px;margin:10px 0}
+  .note{color:var(--muted);font-size:12.5px}
+  table{width:100%;border-collapse:collapse;margin:6px 0 8px;font-size:12.5px}
+  th,td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:top}
+  th{background:var(--soft);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  td.n{text-align:center;white-space:nowrap}
+  .card{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:8px 0;break-inside:avoid}
+  .card h3{margin:2px 0 4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}
+  .tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:99px;background:var(--soft);color:var(--accent-d);margin-right:4px}
+  svg{width:100%;height:auto;display:block;margin:6px 0}
+  .pb{break-before:page}
+  @media (max-width:640px){ .grid2{grid-template-columns:1fr} table{font-size:11.5px} }
+  @media print{
+    @page{size:A4;margin:14mm 13mm}
+    body{font-size:11.6px}
+    .page{padding:0;max-width:none}
+    h2{margin-top:16px}
+    .card,table,svg{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<h1>Running KlimaShift Smarter</h1>
+<div class="meta">Shekhar Suman · IIT Patna (B.Tech + MBA, OSCM) · Thinking assignment for Ankit Chouhan</div>
+
+<div class="thesis"><b>My core idea in one line:</b> KlimaShift sells <i>numbers people can trust</i>. Most errors are <b>born upstream</b> (at the panel, during install and mapping) but <b>found downstream</b> (in the savings report, often by the customer). So the first thing to automate is not "more AI insights". It is catching errors at the panel, before they reach a report.</div>
+
+<p class="note">What I don't know: I haven't seen your data, tools or team. Every number below is either from public sources, a stated assumption, or a starting target that I would reset after the first week of measurement. The questions I'd ask you are at the end.</p>
+
+<!-- ============ Q1 ============ -->
+<h2>1. Map it: where work gets stuck, repeated, or depends on one person</h2>
+
+<svg viewBox="0 0 960 300" role="img" aria-label="Seven-step workflow with hotspots">
+  <defs>
+    <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c8553d"/></marker>
+  </defs>
+  <style>
+    .bx{stroke:#e2dfec;stroke-width:1.5}
+    .t{font:600 15px 'Segoe UI',sans-serif;fill:#24212f}
+    .s{font:11.5px 'Segoe UI',sans-serif;fill:#4a4660}
+    .k{font:600 10.5px 'Segoe UI',sans-serif}
+  </style>
+  <!-- boxes -->
+  <g>
+    <rect class="bx" x="10"  y="20" width="122" height="54" rx="8" fill="#fbf1dc"/>
+    <rect class="bx" x="146" y="20" width="122" height="54" rx="8" fill="#fbf1dc"/>
+    <rect class="bx" x="282" y="20" width="122" height="54" rx="8" fill="#f8dccf"/>
+    <rect class="bx" x="418" y="20" width="122" height="54" rx="8" fill="#f2b8a6"/>
+    <rect class="bx" x="554" y="20" width="122" height="54" rx="8" fill="#f8dccf"/>
+    <rect class="bx" x="690" y="20" width="122" height="54" rx="8" fill="#f8dccf"/>
+    <rect class="bx" x="826" y="20" width="122" height="54" rx="8" fill="#f2b8a6"/>
+  </g>
+  <text class="t" x="71"  y="52" text-anchor="middle">1 Win</text>
+  <text class="t" x="207" y="52" text-anchor="middle">2 Build</text>
+  <text class="t" x="343" y="52" text-anchor="middle">3 Install</text>
+  <text class="t" x="479" y="52" text-anchor="middle">4 Connect</text>
+  <text class="t" x="615" y="52" text-anchor="middle">5 Analyse</text>
+  <text class="t" x="751" y="52" text-anchor="middle">6 Act</text>
+  <text class="t" x="887" y="52" text-anchor="middle">7 Prove</text>
+  <!-- notes under each -->
+  <g class="s">
+    <text x="12" y="96">Founder-led. Each</text><text x="12" y="111">proposal custom.</text>
+    <text class="k" x="12" y="128" fill="#6c5ab1">ONE PERSON</text>
+
+    <text x="148" y="96">Kits picked from a</text><text x="148" y="111">sheet. Missing part</text><text x="148" y="126">= second visit.</text>
+    <text class="k" x="148" y="143" fill="#d99a2b">REPEATED</text>
+
+    <text x="284" y="96">Night slots, store</text><text x="284" y="111">access, electricians</text><text x="284" y="126">coordinated on chat.</text>
+    <text class="k" x="284" y="143" fill="#d99a2b">STUCK · REPEATED</text>
+
+    <text x="420" y="96">Clamp→equipment</text><text x="420" y="111">mapping by hand.</text><text x="420" y="126">Reversed CT, wrong</text><text x="420" y="141">phase, wrong label.</text>
+    <text class="k" x="420" y="158" fill="#c8553d">NOBODY CHECKS</text>
+
+    <text x="556" y="96">Thresholds tuned</text><text x="556" y="111">by hand. Dead meters</text><text x="556" y="126">noticed late.</text>
+    <text class="k" x="556" y="143" fill="#d99a2b">STUCK</text>
+
+    <text x="692" y="96">Alerts forwarded on</text><text x="692" y="111">WhatsApp. No record</text><text x="692" y="126">if anyone acted.</text>
+    <text class="k" x="692" y="143" fill="#d99a2b">REPEATED</text>
+
+    <text x="828" y="96">Monthly report in a</text><text x="828" y="111">spreadsheet. Baseline</text><text x="828" y="126">= analyst judgement.</text>
+    <text class="k" x="828" y="143" fill="#6c5ab1">ONE PERSON</text>
+  </g>
+  <!-- born upstream, found downstream -->
+  <path d="M410,185 C520,280 780,280 885,185" fill="none" stroke="#c8553d" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+  <text class="s" x="343" y="200" text-anchor="middle" fill="#c8553d" style="font-weight:600">errors are born here…</text>
+  <text class="s" x="887" y="200" text-anchor="middle" fill="#c8553d" style="font-weight:600">…and found here,</text>
+  <text class="s" x="887" y="215" text-anchor="middle" fill="#c8553d" style="font-weight:600">often by the customer</text>
+  <text class="s" x="647" y="290" text-anchor="middle">Weeks pass between the two. Every report, alert and saving claim in between is built on the bad data.</text>
+</svg>
+<p class="note">Colour = my ranking below (darker = worse). The step notes are my hypotheses from your brief, your case studies and how field-IoT businesses usually run. I'd validate them in week 1 by shadowing installs and logging the team's time for a week.</p>
+
+<h3>Ranked list (and how I ranked it)</h3>
+<p>I scored each problem 1–5 on four things and weighted them. <b>Customer outcome (35%)</b>: does it hurt savings, trust or renewal? <b>Frequency (25%)</b>: how often does it happen per site per month? <b>One-person risk (20%)</b>: does it stop if one person is away? <b>Late discovery (20%)</b>: how far downstream is the error found? The fourth criterion is the one most people miss. An error caught at the panel costs one minute. The same error caught in a customer's report costs the relationship.</p>
+<table>
+  <tr><th>#</th><th>Problem</th><th>Step</th><th class="n">Outcome</th><th class="n">Freq</th><th class="n">1-person</th><th class="n">Late</th><th class="n">Score</th></tr>
+  <tr><td>1</td><td>Mapping and install errors go unverified (reversed clamp, wrong phase, wrong equipment label)</td><td>3–4</td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">5</td><td class="n"><b>4.55</b></td></tr>
+  <tr><td>2</td><td>Savings reports built by hand; the baseline depends on one analyst's judgement</td><td>7</td><td class="n">5</td><td class="n">4</td><td class="n">5</td><td class="n">3</td><td class="n"><b>4.35</b></td></tr>
+  <tr><td>3</td><td>Device and data health after install: meters drop out, power supplies sag (the Dunkin' SMPS case), gaps found late</td><td>4–5</td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="n">5</td><td class="n"><b>4.00</b></td></tr>
+  <tr><td>4</td><td>Alert triage and follow-up: who gets what, did anyone act, did it work?</td><td>5–6</td><td class="n">4</td><td class="n">5</td><td class="n">3</td><td class="n">3</td><td class="n"><b>3.85</b></td></tr>
+  <tr><td>5</td><td>Kit build and night-install coordination; missing parts cause repeat visits</td><td>2–3</td><td class="n">2</td><td class="n">3</td><td class="n">3</td><td class="n">4</td><td class="n"><b>2.85</b></td></tr>
+  <tr><td>6</td><td>Prospect research, audits and proposals (founder-dependent)</td><td>1</td><td class="n">3</td><td class="n">2</td><td class="n">5</td><td class="n">1</td><td class="n"><b>2.75</b></td></tr>
+  <tr><td>7</td><td>Setting schedules and controls per site</td><td>6</td><td class="n">3</td><td class="n">2</td><td class="n">3</td><td class="n">2</td><td class="n"><b>2.55</b></td></tr>
+</table>
+<p>Through an OSCM lens, this is a flow line where the bottleneck is not the slowest step but the <b>step with the worst first-pass yield</b> (the share of installs that are right the first time). I'd track two numbers from day one. <b>Install-to-trusted-data time</b>: hours from power-up to a site whose every channel is verified. <b>Escaped defects</b>: mapping or data errors found after a site was marked "done".</p>
+
+<!-- ============ Q2 ============ -->
+<h2 class="pb">2. The 5 things most worth automating</h2>
+<p>Rule I used: automate the <b>checking</b> and the <b>routine</b>. Keep humans on <b>judgement calls and anything a customer will read</b>. AI (LLMs) only where the task is language or images. Detection stays rules + site-specific statistics. Public benchmarks back this: in TSB-AD (NeurIPS 2024), simple statistical detectors often matched or beat deep models.</p>
+
+<div class="card">
+<h3>A. Auto-commissioning: a "site acceptance test" before the electrician leaves</h3>
+<div class="grid2">
+<div><b>What it does:</b> when a kit powers up, the platform runs automatic checks on every channel. Is data arriving? Is power negative (clamp reversed)? Is the power factor impossible for that equipment, e.g. a compressor reading below 0.3 (clamp on the wrong phase)? Is current outside the nameplate range? Is the meter's supply voltage unstable? Then a <b>switch test</b>: the ops app asks the electrician to switch equipment X off and on, and confirms the <i>right</i> channel dropped. Equipment that can't be switched (a walk-in freezer) is verified from its compressor cycling over the next 24 hours.</div>
+<div><b>Data:</b> live channel readings, the planned channel map (from the survey), equipment type and nameplate, and switch-test timestamps from the ops app (which already does QR onboarding).<br><b>Stays human:</b> fixing the fault; overriding a check (with a reason + photo).<br><b>If wrong:</b> a false pass lets bad data through, which B catches later. A false fail wastes an electrician's night, so overrides are allowed and every override is reviewed.</div>
+</div></div>
+
+<div class="card">
+<h3>B. Data-health monitor: a morning list of broken channels, ranked</h3>
+<div class="grid2">
+<div><b>What it does:</b> every morning, checks every site and channel for gaps (&gt;5% missing), flatlines on equipment that should cycle, sudden step changes with no logged action, device reboots or supply dips, stuck temperature sensors, and (monthly) <b>meter kWh vs utility-bill kWh</b>. Opens a ticket with the likely cause and whether a remote fix is possible.</div>
+<div><b>Data:</b> raw time series, device logs, action log, bills (parsed with Docling or an LLM from PDF or photo).<br><b>Stays human:</b> deciding on a truck roll.<br><b>If wrong:</b> a miss means a report built on bad data, so B also acts as the gate for D. A false alarm means a wasted visit, which is why truck rolls stay a human decision.</div>
+</div></div>
+
+<div class="card">
+<h3>C. Alert triage and closing the loop</h3>
+<div class="grid2">
+<div><b>What it does:</b> turns detections into a few alerts people act on. Equipment on after closing (vs store hours). Freezer short-cycling (starts/hour above 2× that unit's own 30-day normal). Power factor below 0.9 where billing is in kVAh, e.g. Maharashtra moved commercial users above 20 kW to kVAh in 2025. Temperature excursions. It de-duplicates, ranks by ₹ or risk, sends each alert to the right person on WhatsApp with one-tap <i>Done / Not useful</i>, then checks the energy data afterwards to see whether the action worked. An LLM only rewrites the alert in plain Hindi or English.</div>
+<div><b>Data:</b> detections, store hours, tariff, contact roles, feedback taps.<br><b>Stays human:</b> anything that looks like an equipment failure, and any customer escalation.<br><b>If wrong:</b> too many false alerts and customers stop reading <i>all</i> alerts (the biggest risk). Missing a cold-storage temperature excursion is a food-safety issue, so that class always sends and is never throttled.</div>
+</div></div>
+
+<div class="card">
+<h3>D. Savings report: auto-drafted, human-signed</h3>
+<div class="grid2">
+<div><b>What it does:</b> data passes B's gates → baseline model (energy vs outdoor temperature, store hours, day of week; open-source <b>OpenDSM</b>, formerly OpenEEmeter) → avoided kWh and ₹ <b>as a range</b>, not a single number → change-point detection (<b>ruptures</b>) flags unexplained jumps for the analyst to label → an LLM drafts the narrative. <b>The LLM never writes a number</b>: code inserts every figure, and a check confirms every number in the text matches the table.</div>
+<div><b>Data:</b> site energy, hourly temperature (Open-Meteo), store hours and closures, action log, tariff, optionally daily sales or footfall.<br><b>Stays human:</b> labelling non-routine events and signing every report.<br><b>If wrong:</b> an over-claim the customer discovers loses the renewal. An under-claim leaves value unproven. Both are covered by the eval in section 3.</div>
+</div></div>
+
+<div class="card">
+<h3>E. Survey-to-kit: the audit produces the kit list and the channel map</h3>
+<div class="grid2">
+<div><b>What it does:</b> the audit (panel photo + equipment list in the ops app) generates the bill of materials (clamp sizes and count, sensors), the pick list, and the <b>planned channel map</b>, which then becomes A's checklist on install night.</div>
+<div><b>Data:</b> survey form, equipment→clamp rules, stock sheet.<br><b>Stays human:</b> reviewing the survey; unusual panels.<br><b>If wrong:</b> a missing part means a repeat night visit. Easy to measure, easy to fix.</div>
+</div></div>
+
+<h3>Two I would NOT automate yet</h3>
+<ol>
+<li><b>ML failure prediction as its own product.</b> It's the most tempting one, but there is no labelled failure history yet. Failures are rare per site, and a wrong "your freezer will fail" costs trust fast. For now I'd keep rules-based "watch" signals inside C (rising duty cycle, short-cycling) and <b>start collecting labels</b>: every ticket closed with "what actually broke". In 6–12 months that becomes the training and eval set.</li>
+<li><b>Closed-loop control</b> (the platform switching equipment off by itself). It saves more in theory, but one wrong command on a freezer or a kitchen during service is a food-safety and brand problem for the customer. Schedules stay human-approved until A and B prove the data feeding them is right.</li>
+</ol>
+
+<!-- ============ Q3 ============ -->
+<h2 class="pb">3. Evals: how we'd know each one works</h2>
+<table>
+  <tr><th style="width:9%">Item</th><th style="width:20%">"Correct" means</th><th style="width:22%">Ground truth from</th><th style="width:25%">Metrics (starting targets)</th><th style="width:14%">Caught after launch by</th><th style="width:10%">Edge cases</th></tr>
+  <tr><td><b>A</b> Commission</td><td>Every channel is mapped to the right equipment, with correct polarity and phase</td><td>Switch-test results; a 1-in-10 re-check by a senior engineer; any mapping error found within 30 days</td><td>Escaped mapping defects &lt;2% of channels; false-fail rate &lt;10%; install-to-trusted-data ≤48 h</td><td>Every escaped defect becomes a new automatic check</td><td>Hardware / ops lead</td></tr>
+  <tr><td><b>B</b> Health</td><td>Each flagged issue is real and needs action</td><td>Visit or remote-fix outcome; replay of past incidents (e.g. Dunkin' SMPS)</td><td>Ticket precision ≥80%; recall on replayed incidents ≥90%; median detection &lt;24 h; complete site-days ≥98%</td><td>Any data issue a customer or analyst finds first counts as a miss</td><td>Hardware engineer</td></tr>
+  <tr><td><b>C</b> Alerts</td><td>The recipient agrees it's real and worth acting on</td><td>One-tap feedback; energy data after the action; 50 alerts/week labelled by an analyst</td><td>Precision ≥70%; ≤3 non-critical alerts per store per week; act-rate tracked; 100% of cold-storage excursions sent</td><td>A falling "Done" rate is the early warning of alert fatigue</td><td>Ops analyst + account owner</td></tr>
+  <tr><td><b>D</b> Savings</td><td>The claim is within the model's error band and counts only savings KlimaShift caused</td><td>Backtests, placebo stores, injected savings, utility bills (see deep dive)</td><td>See deep dive</td><td>Customer disputes; monthly placebo drift</td><td>Analyst; 2nd reviewer for claims &gt;20%</td></tr>
+  <tr><td><b>E</b> Kit</td><td>The kit arrives complete and matches the panel</td><td>Install-night checklist (missing / extra parts)</td><td>Kit-complete ≥95%; repeat visits caused by the kit &lt;5%</td><td>Every repeat visit is tagged with a root cause</td><td>Ops lead</td></tr>
+</table>
+
+<h3>Deep dive: the savings-report eval (D), detailed enough to build</h3>
+<p><b>The real difficulty isn't the model, it's that there is no clean "before".</b> The meter goes in on day 1, so there's no hourly history from before KlimaShift. I'd use three sources of "before", in this order. (1) A <b>2–4 week observation period</b> after install with no actions taken. (2) <b>12 months of utility bills</b> for a monthly cross-check. (3) <b>Control stores</b>: a chain has many similar outlets, and staggered roll-outs leave some untreated for a while. That makes a chain the best possible lab.</p>
+<p><b>Unit of evaluation:</b> one site-month savings claim.</p>
+<ol>
+<li><b>Backtest ("placebo in time").</b> On sites with ≥8 weeks of data before any action: fit the model on weeks 1–4 and predict weeks 5–8. True savings are zero, so any "savings" is model error. Compute NMBE (bias) and CV(RMSE) (noise) on daily totals. <i>Pass:</i> |NMBE| ≤ 5% and CV(RMSE) ≤ 20%. These are my starting thresholds, set between ASHRAE Guideline 14's monthly (±5% / 15%) and hourly (±10% / 30%) limits. Output a <b>minimum claimable saving</b> per site, roughly 2× its backtest error. Anything below that is reported as "within noise", not as a saving.</li>
+<li><b>Placebo stores ("placebo in space").</b> Run the full pipeline on untreated stores. The claimed savings should centre on 0. <i>Metric:</i> false-claim rate = share of untreated store-months where we'd claim &gt;5% savings. <i>Pass:</i> ≤5%.</li>
+<li><b>Injected savings.</b> Take untreated data, subtract a known change (e.g. 1.5 kW from 23:00–06:00 to mimic an overnight fix, or a flat 3%, 5%, 10%, 20%), run the pipeline, and compare. <i>Pass:</i> estimate within ±20% of the injected value for injections ≥ the minimum claimable saving. This produces a detection curve: what size of saving we can honestly prove.</li>
+<li><b>Bill reconciliation gate.</b> Monthly meter kWh vs the main-meter utility bill. A gap &gt;3% blocks the report and opens a B ticket. The ₹ conversion uses the site's real tariff (kWh vs kVAh, fixed charges, PF penalty).</li>
+<li><b>Non-routine events.</b> Change-point detection on the model's residuals flags step changes that aren't in the action log. Every flag must be labelled (<i>our action / store change / data issue</i>) before the report can be sent.</li>
+<li><b>Number check.</b> Every number in the drafted text must exactly match the computed table. 100% pass, or the report doesn't send.</li>
+</ol>
+<p><b>Golden set:</b> about 30 site-months (past reports with known or disputed outcomes, plus injected cases), re-run every time the method changes, like regression tests in software. <b>After launch:</b> customer disputes per report (target 0), the placebo false-claim rate re-run monthly, the share of reports blocked by data gates, and whether savings persist or decay after month 3. <b>What changes in the report:</b> "18% ± 4%, method X, 3 days excluded (store closed)" instead of a bare "25%". I think the range is a selling point at renewal, not a weakness.</p>
+
+<!-- ============ Q4 ============ -->
+<h2 class="pb">4. Prioritise: 3 people, 90 days</h2>
+<p><b>Assumed team:</b> me (product/ops owner, analysis), one backend/data engineer, one field engineer about half-time from installs. <b>Criteria:</b> customer impact 30%, data readiness 20%, effort (lower = better) 20%, risk if wrong (lower = better) 15%, unlocks other work 15%.</p>
+<table>
+  <tr><th>Item</th><th class="n">Impact</th><th class="n">Data ready</th><th class="n">Effort</th><th class="n">Risk</th><th class="n">Unlocks</th><th class="n">Score</th><th>Decision</th></tr>
+  <tr><td>B Data health</td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">4</td><td class="n">5</td><td class="n"><b>4.55</b></td><td>First</td></tr>
+  <tr><td>A Auto-commissioning</td><td class="n">4</td><td class="n">4</td><td class="n">4</td><td class="n">4</td><td class="n">5</td><td class="n"><b>4.15</b></td><td>First (with B)</td></tr>
+  <tr><td>D Savings report</td><td class="n">5</td><td class="n">3</td><td class="n">2</td><td class="n">2</td><td class="n">4</td><td class="n"><b>3.40</b></td><td>Eval now, automation from day 45</td></tr>
+  <tr><td>C Alert triage</td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="n">3</td><td class="n">3</td><td class="n"><b>3.30</b></td><td>Pilot on one chain, day 60</td></tr>
+  <tr><td>E Survey-to-kit</td><td class="n">2</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">2</td><td class="n"><b>2.50</b></td><td>Dropped: a standard kit + checklist instead</td></tr>
+</table>
+<p class="note">Scores 1–5; for effort and risk, 5 = easiest / safest. C and D are basically tied. I put D first because renewals depend on it and its eval (the backtest) is cheap to start. The weights matter less than the order they produce. If you'd weigh customer impact higher, D moves up, and I'd be fine with that.</p>
+
+<svg viewBox="0 0 960 120" role="img" aria-label="Dependency chain">
+  <style>.c{font:600 14px 'Segoe UI',sans-serif;fill:#24212f}.d{font:12px 'Segoe UI',sans-serif;fill:#4a4660}</style>
+  <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#6c5ab1"/></marker></defs>
+  <rect x="10" y="20" width="210" height="60" rx="8" fill="#e6e1f8"/><text class="c" x="115" y="46" text-anchor="middle">A + B: trusted data</text><text class="d" x="115" y="66" text-anchor="middle">days 0–45</text>
+  <rect x="260" y="20" width="210" height="60" rx="8" fill="#ece8f8"/><text class="c" x="365" y="46" text-anchor="middle">D: savings you can defend</text><text class="d" x="365" y="66" text-anchor="middle">eval 15–45 · build 45–90</text>
+  <rect x="510" y="20" width="210" height="60" rx="8" fill="#ece8f8"/><text class="c" x="615" y="46" text-anchor="middle">C: alerts people act on</text><text class="d" x="615" y="66" text-anchor="middle">pilot 60–90</text>
+  <rect x="760" y="20" width="190" height="60" rx="8" fill="#dff0e8"/><text class="c" x="855" y="46" text-anchor="middle">Renewal</text><text class="d" x="855" y="66" text-anchor="middle">the actual goal</text>
+  <path d="M222,50 L256,50" stroke="#6c5ab1" stroke-width="2.5" marker-end="url(#ar2)"/>
+  <path d="M472,50 L506,50" stroke="#6c5ab1" stroke-width="2.5" marker-end="url(#ar2)"/>
+  <path d="M722,50 L756,50" stroke="#6c5ab1" stroke-width="2.5" marker-end="url(#ar2)"/>
+  <text class="d" x="480" y="110" text-anchor="middle">Everything downstream inherits the quality of the data upstream, so that's where the 90 days start.</text>
+</svg>
+
+<h3>One real trade-off</h3>
+<p>I'd spend the first ~6 weeks on <b>trusted data (A + B)</b> instead of automating the savings report or building a predictive-maintenance demo. <b>Who this disappoints:</b> the person who builds the monthly reports by hand keeps doing it for another 6 weeks. It also disappoints you and sales, because "trusted data" doesn't demo like "AI predicts failures". My reason is that automating a report built on unchecked data just produces wrong reports faster. To soften it, D's backtest starts in week 3, so the report owner sees progress early.</p>
+
+<h3>What would change my mind</h3>
+<ul>
+<li><b>A big renewal is due within 60 days</b> → D jumps to first, done semi-manually for that customer.</li>
+<li><b>The week-1 audit shows mapping errors are rare (&lt;2% of channels)</b> → A shrinks to a checklist, and that time moves to C.</li>
+<li><b>A large new contract means installs are about to 5×</b> → E comes back, because kit and install throughput becomes the bottleneck.</li>
+<li><b>Customers already ignore alerts</b> (low read/act rates) → redesign C before sending more of anything.</li>
+<li><b>Chains will share daily sales or footfall</b> → D becomes much more accurate, and cheaper to do earlier.</li>
+</ul>
+
+<h3>An urgent interruption</h3>
+<p>I'd keep ~20% of capacity unplanned for this. Then I ask three questions. <b>(1) Does it touch trust in our numbers?</b> Example: a chain's ops head says "your dashboard says 18% saved but our bill went up". Then it's top priority, because it's the core promise and it becomes a golden-set case for D. <b>(2) Is there real money with a deadline?</b> Example: you need a pilot proposal or a predictive-maintenance demo by Friday. Then I timebox it (e.g. 2 days, one person) from the buffer, using real data and honest caveats. <b>(3) What slips if I do it?</b> I'd tell you plainly, e.g. "this moves A's switch test by 4 days", and let you make the call. I won't absorb it silently and miss day 30.</p>
+
+<!-- ============ Q5 ============ -->
+<h2 class="pb">5. Sequence it: the 90-day plan</h2>
+<table>
+  <tr><th style="width:12%">When</th><th style="width:44%">What ships</th><th style="width:44%">How we'll know (measured against week-1 baseline)</th></tr>
+  <tr><td><b>Day 14</b><br>first visible win</td><td><b>Week 1:</b> shadow 2 night installs, log the team's time for a week, audit every channel on ~20 live sites, collect past incidents. <b>Week 2:</b> a daily script running B's first 5 checks across <i>all</i> sites → a <b>morning "broken channels" list</b> on WhatsApp.</td><td>Baselines known: % bad channels, install-to-trusted-data time, report hours per customer. The win: "found N broken or mis-mapped channels across M sites" and fixed the top ones.</td></tr>
+  <tr><td><b>Day 30</b><br>early results</td><td>A v1: auto-checks + switch test on every new install (ops app step or a simple form). B issues auto-ticketed. D: <b>backtest the current savings method</b> on 10 sites.</td><td>Escaped defects on new installs tracked weekly. First lessons written up, e.g. which checks fire falsely at night, and how big the noise floor of today's savings method is.</td></tr>
+  <tr><td><b>Day 60</b><br>scale / cut</td><td>A + B on all sites. D v1 auto-drafts for 1–2 customers with analyst sign-off. C pilot on one chain with an alert budget and feedback taps. <b>Cut</b> any check with precision &lt;50%. Cut the switch test for low-value equipment if it slows installs.</td><td>Ticket precision ≥80%; report prep time per customer down (target ≤1 h review); first placebo-store results.</td></tr>
+  <tr><td><b>Day 90</b><br>proof</td><td>Short write-up against the measures named on day 0. Decide what's next (failure-prediction labels, E if volume grows).</td><td>Escaped mapping defects &lt;2%; install-to-trusted-data ≤48 h; complete site-days ≥98%; every savings claim with a range that passes the backtest; zero disputed reports; C precision ≥70% on the pilot chain.</td></tr>
+</table>
+
+<div class="grid2">
+<div>
+<h3>What I'd need from you</h3>
+<ul>
+<li>Read access to raw device data, past reports and any ticket or incident history</li>
+<li>Permission to add a step to the ops app (or run a form alongside it)</li>
+<li>The field team's time for the switch test and the week-1 audit</li>
+<li>30 minutes a week with you; intros to 2–3 store or facilities managers</li>
+<li>Utility bills and tariff category for pilot sites</li>
+</ul>
+</div>
+<div>
+<h3>Assumptions I'm least sure of</h3>
+<ul>
+<li>That mapping and data errors are common enough to matter (week 1 tells us)</li>
+<li>That store hours, closures and ideally sales data can be obtained from chains</li>
+<li>Team shape: who the 3 people are, and how much field time I get</li>
+<li>How savings are calculated today, and how customers react to a range</li>
+<li>Whether the ops app can be changed quickly</li>
+</ul>
+</div>
+</div>
+
+<h2>Questions I'd ask you</h2>
+<ol>
+<li>How many sites and chains are live, and how many new installs a month?</li>
+<li>How is the savings % calculated today: what baseline, adjusted for what? (e.g. the 25% at McDonald's Poland)</li>
+<li>How often is a channel mis-mapped or a device unhealthy after install, and how is it found today?</li>
+<li>What share of alerts lead to an action? Do customers ever say "too many alerts"?</li>
+<li>Who is the buyer at a franchise operator (facilities, ops or finance), and what decides a renewal?</li>
+<li>Which tasks would stop if one specific person went on leave for two weeks?</li>
+</ol>
+
+<p class="note"><b>Tools and AI use:</b> [Write this honestly in your own words: which parts you researched or drafted with AI, and which ideas are yours. Ankit asked for this explicitly.] Open-source pieces named above, and why: OpenDSM (standard, auditable baselines), ruptures (change points), Open-Meteo (free hourly weather), Docling (bill parsing). I deliberately skipped heavier tools (building ontologies, time-series foundation models) because the team and data aren't at that stage yet.</p>
+
+</div>
+</body>
+</html>
